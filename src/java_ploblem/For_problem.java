@@ -25,7 +25,12 @@ public class For_problem {
 //		problem14();
 //		problem15();
 //		problem16();
-		problem17();
+//		problem17();
+//		problem18();
+//		problem19();
+//		problem20();
+//		problem21();
+//		problem22();
 	}
 
 	public static void problem1() {
@@ -466,6 +471,160 @@ public class For_problem {
 //				書式指定子 %d=整数、 \n=改行
 			}
 		}
+	}
+
+	public static void problem18() throws IOException {
+//		数値を繰り返して入力し、0 が入力されたら入力を止め、
+//		それまでの合計を表示するプログラムを作成しなさい
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int num;
+		int total = 0;
+
+		System.out.print("数値を入力してください:");
+		num = Integer.parseInt(br.readLine());
+
+		while(num != 0) {
+			total += num;
+			System.out.print("数値を入力してください:");
+			num = Integer.parseInt(br.readLine());
+		}
+
+		System.out.printf("合計値は%dです。",(total));
+
+	}
+
+	public static void problem19() throws IOException{
+//		数値を繰り返して入力し、0 が入力されたら入力を止め、平均値を表示するプログラムを作成しなさい。
+//		※ 	最後に入力された 0 は平均に含めない。
+//		※ 	少なくとも 1 回は入力が行われるものとする。（最初に 0 を入力してはいけない）
+
+		Scanner sc = new java.util.Scanner(System.in);
+		int num;
+		int total = 0;
+		int i;
+
+		boolean is_flag = true;
+
+		try {
+			for(i = 1; is_flag ;) {
+				System.out.print("数値を入力してください：");
+				num = sc.nextInt();
+				total += num;
+
+				if(num == 0) {
+					i--;
+					is_flag = false;
+				}else {
+					i++;
+				}
+			}
+
+			System.out.printf("平均値は%.2fです",((double) total / i));
+
+		}catch(InputMismatchException e) {
+			System.out.println("不正な値です。");
+		}
+	}
+
+	public static void problem20() {
+//		サイズを示す数値を入力し、
+//		何等かの文字で例のような三角形を表示するプログラムを作成しなさい。
+
+//		サイズ 4 の例
+//		$
+//		$$
+//		$$$
+//		$$$$
+
+		Scanner sc = new java.util.Scanner(System.in);
+		System.out.print("数値を入力してください");
+		int size = sc.nextInt();
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j <= i; j++) {
+				System.out.print("$");
+			}
+
+			System.out.println("");
+		}
+	}
+
+	public static void problem21() {
+//		サイズを示す数値を入力し、
+//		そのサイズの×印を何等かの文字で表示する
+//		プログラムを作成しなさい。
+
+//		サイズ 3 の例
+//		X X
+//		 X
+//		X X
+
+//		サイズ 4 の例
+//		X  X
+//		 XX
+//		 XX
+//		X  X
+
+//		サイズ 5 の例 0 4 1 3 2
+//		X   X
+//		 X X
+//		  X
+//		 X X
+//		X   X
+
+		Scanner sc = new java.util.Scanner(System.in);
+		System.out.print("数値を入力してください：");
+
+		int size = sc.nextInt();
+		int max = size -1;
+		int min = 0;
+
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j < size; j++) {
+				if(j == min) {
+					System.out.print("X");
+
+				}else if(j == max){
+					System.out.print("X");
+
+				}else {
+					System.out.print(" ");
+				}
+
+				if(j == (size -1)) {
+					System.out.println();
+				}
+			}
+			max -=1;
+			min +=1;
+		}
+	}
+
+	public static void problem22() {
+//		フィボナッチ数列を表示するプログラムを作成しなさい。
+//		最初の２つの項を 0、1 とし、1000 まで（ 1000 以下の項）を表示するものとします。
+//		※ 	フィボナッチ数列：
+//		　それぞれの項がその直前の 2 つの項の和になっている数列のこと。
+//		例：0, 1, 1, 2, 3, 5, 8, 13, 21, ...
+
+		int term1 = 0;
+		int term2 = 1;
+		int evacuate = term1 + term2;
+		boolean is_first = true;
+
+		while(evacuate <= 1000) {
+			if(is_first) {
+				is_first = false;
+				System.out.print(term1+","+evacuate);
+			}
+
+			System.out.print(","+evacuate );
+
+			term1 = term2;
+			term2 = evacuate;
+			evacuate = term1 + term2;
+		}
+//		結果：
+//		0,1,1,2,3,5,8,13,21,34,55,89,144,233,377,610,987
 	}
 
 }
