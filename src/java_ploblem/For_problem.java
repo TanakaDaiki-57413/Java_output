@@ -21,7 +21,11 @@ public class For_problem {
 //		problem10();
 //		problem11();
 //		problem12();
-		problem13();
+//		problem13();
+//		problem14();
+//		problem15();
+//		problem16();
+		problem17();
 	}
 
 	public static void problem1() {
@@ -329,7 +333,139 @@ public class For_problem {
 		}
 
 		sc.close();
+	}
 
+	public static void problem14() {
+//		前の問題に次の修正を加えなさい。
+//		１球ごとにストライク、ボール、ファウルの何れかを入力する。
+//		（残念ながらヒットにはなりません）
+//		ファウルの場合、２ストライクまではストライクにカウントするが、３ストライクにはならない。
+//		３ストライクまたは４ボールになったら入力を止め、ストライクとボールのカウントを表示する。
+		int pitching;
+		int strike_cnt = 0;
+		int ball_cnt = 0;
+
+		boolean is_flag = true;
+		Scanner sc = new java.util.Scanner(System.in);
+		try {
+			for(;is_flag;) {
+				System.out.println("ストライク:1, ボール:2, ファール:3");
+				System.out.print("上記候補から数字で入力してください：");
+				pitching = sc.nextInt();
+
+				switch(pitching) {
+					case 1:
+						strike_cnt += 1;
+						break;
+					case 2:
+						ball_cnt += 1;
+						break;
+					case 3:
+//						追加
+						if(strike_cnt < 2) {
+							strike_cnt += 1;
+						}
+						break;
+					default:
+						System.out.println("範囲外の数字です。");
+						break;
+				}
+
+				if(strike_cnt == 3 || ball_cnt == 4){
+					is_flag = false;
+				}
+			}
+
+			System.out.println("ストライク数は"+strike_cnt+"です。");
+			System.out.println("ボール数は"+ball_cnt+"です。");
+
+		}catch(InputMismatchException e) {
+			System.out.println("入力値が不正でした");
+		}
+
+		sc.close();
+	}
+
+	public static void problem15() throws IOException {
+//		入力された数が素数かどうかを判定するプログラムを作成しなさい
+//		※ 	判定する数は 4 以上としてよい。
+
+		Scanner sc = new java.util.Scanner(System.in);
+		boolean is_prime = true;
+		try {
+			System.out.print("4以上の数値を入力してください:");
+			int num = sc.nextInt();
+
+			if(num < 4) {
+				System.out.println("4未満の数値が検出されました");
+				System.out.println("処理を終了します");
+				sc.close();
+				return;
+			}
+
+			for(int i = 2; i < num ; i++) {
+				if(num % i == 0) {
+					is_prime = false;
+					break;
+				}
+			}
+
+			if(is_prime) {
+				System.out.println(num+"は素数です。");
+			}else{
+				System.out.println(num+"は素数ではありません。");
+			}
+
+			sc.close();
+
+		}catch(InputMismatchException e) {
+			System.out.println("無効な値を検出しました");
+		}
+	}
+
+	public static void problem16() throws IOException{
+//		2 以上の数値を入力し、素因数分解した結果を表示しなさい。
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		boolean is_prime = false;
+
+		try {
+			System.out.print("2以上の数値を入力してください");
+			int x = Integer.parseInt(br.readLine());
+			if (x < 2) {
+				System.out.println("2未満の数値を検出");
+				System.out.println("処理を終了します");
+				br.close();
+				return;
+			}
+
+			for(int i = 2; (!is_prime);) {
+				if(x == i) {
+					System.out.print(i);
+					is_prime = true;
+				}else if(x % i == 0) {
+					x = x / i;
+					System.out.print(i+" ");
+				}else {
+					i++;
+				}
+			}
+
+		}catch(NumberFormatException e) {
+			System.out.println("無効な値を検出しました");
+		}
+	}
+
+	public static void problem17() {
+//		九九表（一の段～九の段）を表示するプログラムを作成しなさい。
+//		※ 	System.out.printfを使用する。System.out.printf(" %2d", x );のように、
+//		%2dと記述すると表示が2桁に揃う。
+
+		for(int i = 1; i < 10; i++) {
+			for(int j = 1; j < 10; j++) {
+				System.out.printf("%d\n",(i * j));
+//				書式指定子 %d=整数、 \n=改行
+			}
+		}
 	}
 
 }
